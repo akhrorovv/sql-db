@@ -1,4 +1,5 @@
 class CreditCard {
+  // int? id;
   String? cardNumber;
   String? expiredDate;
   String? cardType;
@@ -6,16 +7,24 @@ class CreditCard {
 
   CreditCard({this.cardNumber, this.expiredDate, this.cardType, this.cardImage});
 
-  CreditCard.fromMap(Map<String, dynamic> json)
-      : cardNumber = json['cardNumber'],
-        expiredDate = json['expiredDate'],
-        cardType = json['cardType'],
-        cardImage = json['cardImage'];
+  Map<String, dynamic> toMap(){
+    return {
+      // 'id': id,
+      'cardNumber': cardNumber,
+      'expiredDate': expiredDate,
+      'cardType': cardType,
+      'cardImage': cardImage,
+    };
+  }
 
-  Map<String, dynamic> toMap() => {
-    'expiredDate': expiredDate,
-    'cardNumber': cardNumber,
-    'cardType': cardType,
-    'cardImage': cardImage
-  };
+  static CreditCard fromMap(Map map) {
+    CreditCard creditCard = CreditCard();
+    // creditCard.id = map['id'];
+    creditCard.cardNumber = map['cardNumber'];
+    creditCard.expiredDate = map['expiredDate'];
+    creditCard.cardType = map['cardType'];
+    creditCard.cardImage = map['cardImage'];
+
+    return creditCard;
+  }
 }

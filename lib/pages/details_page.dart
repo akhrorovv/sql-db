@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:sql_db/services/sql_service.dart';
 
 import '../models/credit_card_model.dart';
 
@@ -53,12 +54,14 @@ class _DetailsPageState extends State<DetailsPage> {
       } else {
         return;
       }
-      backToFinish(creditCard);
+
+      SqlService.createCreditCard(creditCard);
+      backToFinish();
     });
   }
 
-  backToFinish(CreditCard creditCard) {
-    Navigator.of(context).pop(creditCard);
+  backToFinish() {
+    Navigator.of(context).pop(true);
   }
 
   String getCardType() {
@@ -70,7 +73,7 @@ class _DetailsPageState extends State<DetailsPage> {
     } else if (cardNumber.startsWith('5')) {
       return 'MASTER';
     }
-    return '';
+    return 'unknown';
   }
 
   @override
